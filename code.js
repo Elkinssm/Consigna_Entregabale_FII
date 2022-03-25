@@ -44,7 +44,7 @@ function obtenerDatosDelUsuario() {
       valor: datosPersona.nombre,
     })
   ) {
-    alert("Datos no validos");
+    alert("Datos no validos, porfavor verifique sus datos");
     datosPersona.nombre = "";
     return;
   }
@@ -55,7 +55,7 @@ function obtenerDatosDelUsuario() {
       valor: datosPersona.edad,
     })
   ) {
-    alert("Datos no validos");
+    alert("Datos no validos, ingrese su año de nacimiento");
     datosPersona.edad = "";
     return;
   } else {
@@ -68,7 +68,7 @@ function obtenerDatosDelUsuario() {
       valor: datosPersona.ciudad,
     })
   ) {
-    alert("Datos no validos");
+    alert("Datos no validos, porfavor verifique sus datos");
     datosPersona.ciudad = "";
     return;
   }
@@ -87,8 +87,6 @@ function validarDatosPersona(dato) {
     return true;
   }
 }
-
-//console.log(datosPersona);
 
 function renderizarDatosUsuario() {
   /* ------------------- NO TOCAR NI ELIMINAR ESTA FUNCION. ------------------- */
