@@ -38,10 +38,56 @@ cambiarTema.addEventListener("click", alternarColorTema);
 function obtenerDatosDelUsuario() {
   /* --------------- PUNTO 1: Escribe tu codigo a partir de aqui --------------- */
   datosPersona.nombre = prompt("Ingresa tu nombre");
-  datosPersona.edad = 2022 - prompt("Ingresa el año en que naciste");
+  if (
+    !validarDatosPersona({
+      nombre: "nombre",
+      valor: datosPersona.nombre,
+    })
+  ) {
+    alert("Datos no validos");
+    datosPersona.nombre = "";
+    return;
+  }
+  datosPersona.edad = prompt("Ingresa el año en que naciste");
+  if (
+    !validarDatosPersona({
+      nombre: "edad",
+      valor: datosPersona.edad,
+    })
+  ) {
+    alert("Datos no validos");
+    datosPersona.edad = "";
+    return;
+  } else {
+    datosPersona.edad = 2022 - datosPersona.edad;
+  }
   datosPersona.ciudad = prompt("Ingresa la ciudad donde vives");
+  if (
+    !validarDatosPersona({
+      nombre: "ciudad",
+      valor: datosPersona.ciudad,
+    })
+  ) {
+    alert("Datos no validos");
+    datosPersona.ciudad = "";
+    return;
+  }
   datosPersona.interesPorJs = confirm("Te interesa Javascript") ? "Si" : "No";
 }
+
+function validarDatosPersona(dato) {
+  if (dato.nombre === "nombre" || dato.nombre === "ciudad") {
+    const re = /^(([A-Za-zÀ-ÿ])+[ ]?)*$/g;
+    return re.test(String(dato.valor).toLowerCase());
+  }
+  if (dato.nombre === "edad") {
+    if (isNaN(dato.valor)) {
+      return false;
+    }
+    return true;
+  }
+}
+
 //console.log(datosPersona);
 
 function renderizarDatosUsuario() {
@@ -76,52 +122,13 @@ function alternarColorTema() {
     document.getElementById("sitio").classList.toggle("dark");
   };
 }
+alternarColorTema();
 
 /* --------------------- PUNTO 5: Escribe tu codigo aqui --------------------- */
-// Finalmente, agregar un listener en nuestra página que nos permita captar el evento
-// de teclado cuando presionamos la tecla F.
-// 1. Captar cuando se presiona una tecla.
-// 2. Si la tecla presionada es la F, al texto del párrafo ‘sobre-mi’ se le deberá
-// eliminar la clase que lo mantiene oculto,
-// ➔ Tips
-// ◆ En este caso la tecla no debe alternar la visibilidad, solamente desocultar
-// por única vez.
-// 5
-
-// document.getElementById("card").addEventListener("keypress", (logKey) => {
-//   if (keypress === "keyF") {
-//     document.getElementById("sobre-mi").classList.remove("sobre-mi");
-//   }
-//   console.log(keypress);
-// });
-
-//const log = document.getElementById("card");
-
-//document.addEventListener("keypress", logKey);
-// const classTest = document.querySelector("p");
-// classTest.classList.remove("oculto");
-
-// function logKey(e) {
-//   //log.textContent += ` ${e.code}`;
-//   debugger;
-//   if (e.code === "KeyF") {
-//     const classTest = document.querySelector("oculto");
-//     classTest.classList.remove("oculto");
-//   }
-
-//   console.log(e.code);
-// }
-
-/////////////////////////////
-// const log = document.getElementById("card");
-
 document.addEventListener("keypress", logKey);
 
 function logKey(e) {
-  //log.textContent += ` ${e.code}`;
   if (e.code === "KeyF") {
-    document.querySelector("p").classList.remove("oculto");
+    document.getElementById("sobre-mi").classList.remove("oculto");
   }
-
-  console.log(e.code);
 }
